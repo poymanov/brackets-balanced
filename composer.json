@@ -1,0 +1,23 @@
+{
+    "name": "poymanov/brackets_balanced",
+    "description": "Checking the balance of brackets in a string",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolay Poymanov",
+            "email": "n.poymanov@gmail.com"
+        }
+    ],
+    "autoload": {
+         "psr-4": {
+             "BracketsBalanced\\": "src/"
+         }
+     },
+    "require": {
+      "php": "^7.1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    }
+}
