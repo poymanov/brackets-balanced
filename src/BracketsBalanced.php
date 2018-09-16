@@ -7,6 +7,7 @@ use InvalidArgumentException;
 class BracketsBalanced
 {
   public $string;
+  public $errors = [];
 
   public function __construct($value)
   {
@@ -33,6 +34,7 @@ class BracketsBalanced
     try {
       $this->verifyStringSymbols();
     } catch (InvalidArgumentException $e) {
+      $this->errors[] = $e->getMessage();
       return false;
     }
 
