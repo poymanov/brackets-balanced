@@ -2,6 +2,8 @@
 
 namespace BracketsBalanced;
 
+use InvalidArgumentException;
+
 class BracketsBalanced
 {
   public $string;
@@ -13,10 +15,14 @@ class BracketsBalanced
 
   public function verifyStringSymbols()
   {
+    if (empty($this->string)) {
+      throw new InvalidArgumentException('Empty string');
+    }
+
     $pattern = '#[\w\[\]]+#m';
 
     if (boolval(preg_match($pattern, $this->string)) !== False) {
-      throw new \InvalidArgumentException;
+      throw new InvalidArgumentException('Incorrect symbols');
     }
 
     return true;
@@ -24,7 +30,11 @@ class BracketsBalanced
 
   public function isBalanced()
   {
-    $this->verifyStringSymbols();
+    try {
+      $this->verifyStringSymbols();
+    } catch (InvalidArgumentException $e) {
+      return false;
+    }
 
     $stack = new Stack();
 
@@ -35,7 +45,7 @@ class BracketsBalanced
         $stack->push($currentSymbol);
       } else if ($currentSymbol == ')') {
         if ($stack->pop() == null) {
-          return False;
+          return false;
         }
       }
     }

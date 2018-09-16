@@ -4,6 +4,7 @@ namespace BracketsBalancedTest;
 
 use PHPUnit\Framework\TestCase;
 use BracketsBalanced\BracketsBalanced;
+use InvalidArgumentException;
 
 class BracketsBalancedTest extends TestCase
 {
@@ -18,9 +19,17 @@ class BracketsBalancedTest extends TestCase
 
   public function test_string_with_incorrect_symbols()
   {
-    $this->expectException(\InvalidArgumentException::class);
+    $this->expectException(InvalidArgumentException::class);
 
     $balanced = new BracketsBalanced('(test)()((()))');
+    $balanced->verifyStringSymbols();
+  }
+
+  public function test_empty_string()
+  {
+    $this->expectException(InvalidArgumentException::class);
+
+    $balanced = new BracketsBalanced('');
     $balanced->verifyStringSymbols();
   }
 
